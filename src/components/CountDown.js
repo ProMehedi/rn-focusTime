@@ -8,22 +8,22 @@ import { fontSize, spacing } from '../utils/Sizes'
 const minutesToMillis = (min) => min * 60 * 1000
 
 // Millis to minutes
-const formateTime = (milis) => {
-  const minutes = Math.floor(milis / 1000 / 60) % 60
-  const seconds = Math.floor(milis / 1000) % 60
+const formateTime = (millis) => {
+  const minutes = Math.floor(millis / 1000 / 60) % 60
+  const seconds = Math.floor(millis / 1000) % 60
   return `${minutes < 10 ? 0 : ''}${minutes}:${
     seconds < 10 ? '0' : ''
   }${seconds}`
 }
 
 const CountDown = ({ minutes, isPaused, onProgress, onEnd }) => {
-  const [milis, setMilis] = React.useState(minutesToMillis(minutes))
+  const [millis, setmillis] = React.useState(minutesToMillis(minutes))
 
   const interval = React.useRef(null)
 
   const countDown = () => {
     let timeLeft
-    setMilis((time) => {
+    setmillis((time) => {
       if (time === 0) {
         clearInterval(interval.current)
         return time
@@ -43,7 +43,7 @@ const CountDown = ({ minutes, isPaused, onProgress, onEnd }) => {
   }
 
   React.useEffect(() => {
-    setMilis(minutesToMillis(minutes))
+    setmillis(minutesToMillis(minutes))
   }, [minutes])
 
   React.useEffect(() => {
@@ -55,7 +55,7 @@ const CountDown = ({ minutes, isPaused, onProgress, onEnd }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{formateTime(milis)}</Text>
+      <Text style={styles.text}>{formateTime(millis)}</Text>
     </View>
   )
 }

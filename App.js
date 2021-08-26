@@ -16,7 +16,7 @@ const App = () => {
   const [focusSubject, setFocusSubject] = React.useState(null)
   const [focusHistory, setFocusHistory] = React.useState([])
 
-  const addFocusHistoryWithState = (subject, status) => {
+  const addFocusHistoryWithStatus = (subject, status) => {
     setFocusHistory([...focusHistory, { subject, status }])
   }
 
@@ -61,11 +61,11 @@ const App = () => {
         <Timer
           focusSubject={focusSubject}
           onTimerEnd={() => {
-            addFocusHistoryWithState(focusSubject, STATUS.COMPLETE)
+            addFocusHistoryWithStatus(focusSubject, STATUS.COMPLETE)
             setFocusSubject(null)
           }}
           clearSubject={() => {
-            addFocusHistoryWithState(focusSubject, STATUS.INCOMPLETE)
+            addFocusHistoryWithStatus(focusSubject, STATUS.INCOMPLETE)
             setFocusSubject(null)
           }}
         />
