@@ -1,13 +1,8 @@
 import React from 'react'
-import {
-  Button,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native'
+import { Platform, StyleSheet, Text, TextInput, View } from 'react-native'
 import RoundedButton from '../../components/RoundedButton'
+import { colors } from '../../utils/Colors'
+import { fontSize, spacing } from '../../utils/Sizes'
 
 const Focus = ({ addSubject }) => {
   const [subject, setSubject] = React.useState('')
@@ -20,12 +15,13 @@ const Focus = ({ addSubject }) => {
           <TextInput
             style={styles.input}
             onChangeText={(text) => setSubject(text)}
+            onSubmitEditing={() => addSubject(subject)}
             placeholder='Type here to focus'
             placeholderTextColor='#ccc'
           />
           <RoundedButton
             title='+'
-            size={Platform.OS === 'ios' ? 45 : 50}
+            size={48}
             onPress={() => addSubject(subject)}
           />
         </View>
@@ -41,14 +37,14 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 0.5,
-    padding: 16,
+    padding: spacing.lg,
     justifyContent: 'center',
   },
   title: {
-    color: '#fff',
+    color: colors.white,
     fontWeight: 'bold',
     fontSize: Platform.OS === 'ios' ? 34 : 30,
-    marginBottom: 20,
+    marginBottom: spacing.xl,
   },
   inputGroup: {
     flexDirection: 'row',
@@ -58,12 +54,12 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#f9f9f9',
-    padding: 12,
-    marginRight: 10,
-    color: '#fff',
+    borderColor: colors.white,
+    padding: Platform.OS === 'ios' ? spacing.lg : spacing.md,
+    marginRight: spacing.md,
+    color: colors.white,
     borderRadius: 4,
-    fontSize: 16,
+    fontSize: fontSize.lg,
   },
 })
 

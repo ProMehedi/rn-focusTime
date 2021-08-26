@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { colors } from '../utils/Colors'
 
 const RoundedButton = ({
   title,
@@ -23,11 +24,11 @@ const styles = (size) =>
       borderRadius: size / 2,
       alignItems: 'center',
       justifyContent: 'center',
-      borderColor: '#fff',
+      borderColor: colors.white,
       borderWidth: 2,
     },
     text: {
-      color: '#fff',
+      color: colors.white,
       fontSize: size / 2,
     },
   })
