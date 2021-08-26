@@ -9,7 +9,7 @@ import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
 import Timing from './Timing'
 
-const DEFAULT_TIME = 0.1
+const DEFAULT_TIME = 1
 
 const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   const [minutes, setMinutes] = React.useState(DEFAULT_TIME)
@@ -17,7 +17,7 @@ const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   const [progress, setProgress] = React.useState(1)
 
   // Keeping App Awake
-  // useKeepAwake()
+  useKeepAwake()
 
   const onProgress = (value) => {
     setProgress(value)

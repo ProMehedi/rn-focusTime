@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "FocusTime",
-    "slug": "FocusTime",
-    "version": "1.0.0",
+    "slug": "rn-focustime",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "React Native app for Time Tracking what would you like to focus on!",
+    "githubUrl": "https://github.com/ProMehedi/rn-focusTime"
   }
 }
