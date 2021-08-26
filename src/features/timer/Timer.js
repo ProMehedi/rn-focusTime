@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import CountDown from '../../components/CountDown'
@@ -7,8 +7,10 @@ import * as Progress from 'react-native-progress'
 
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
+import Timing from './Timing'
 
 const Timer = ({ focusSubject }) => {
+  const [minutes, setMinutes] = React.useState(5)
   const [isStarted, setIsStarted] = React.useState(false)
   const [progress, setProgress] = React.useState(1)
 
@@ -16,10 +18,20 @@ const Timer = ({ focusSubject }) => {
     setProgress(value)
   }
 
+  const changeTime = (time) => {
+    setIsStarted(false)
+    setMinutes(time)
+    setProgress(1)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.countDown}>
-        <CountDown isPaused={!isStarted} onProgress={onProgress} />
+        <CountDown
+          minutes={minutes}
+          isPaused={!isStarted}
+          onProgress={onProgress}
+        />
         <Progress.Bar
           style={{ marginTop: spacing.lg }}
           color='red'
@@ -30,6 +42,9 @@ const Timer = ({ focusSubject }) => {
       <View style={styles.taskWraper}>
         <Text style={styles.title}>Focusing on:</Text>
         <Text style={styles.task}>"{focusSubject}"</Text>
+      </View>
+      <View style={styles.timingWrapper}>
+        <Timing onChangeTime={changeTime} />
       </View>
       <View style={styles.btnWrapper}>
         <RoundedButton

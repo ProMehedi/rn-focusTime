@@ -38,6 +38,10 @@ const CountDown = ({ minutes = 5, isPaused = false, onProgress }) => {
   }
 
   React.useEffect(() => {
+    setMilis(minutesToMillis(minutes))
+  }, [minutes])
+
+  React.useEffect(() => {
     if (!isPaused) {
       interval.current = setInterval(countDown, 1000)
       return () => clearInterval(interval.current)
