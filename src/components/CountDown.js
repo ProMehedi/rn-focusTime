@@ -5,30 +5,36 @@ import { colors } from '../utils/Colors'
 import { fontSize, spacing } from '../utils/Sizes'
 
 // Minutes to millis
-const minutesToMillis = (minutes) => {
-  return minutes * 60 * 1000
-}
+const minutesToMillis = (min) => min * 60 * 1000
 
 // Millis to minutes
 const formateTime = (milis) => {
-  const minutes = Math.floor(milis / 60000)
-  const seconds = Math.floor((milis % 60000) / 1000)
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+  const minutes = Math.floor(milis / 1000 / 60) % 60
+  const seconds = Math.floor(milis / 1000) % 60
+  return `${minutes < 10 ? 0 : ''}${minutes}:${
+    seconds < 10 ? '0' : ''
+  }${seconds}`
 }
 
-const CountDown = ({ time = 30, isPaused = false }) => {
-  const [milis, setMilis] = React.useState(minutesToMillis(time))
+const CountDown = ({ minutes = 5, isPaused = false, onProgress }) => {
+  const [milis, setMilis] = React.useState(minutesToMillis(minutes))
 
   const interval = React.useRef(null)
 
   const countDown = () => {
+    let timeLeft
     setMilis((time) => {
       if (time === 0) {
         return time
       }
-      const timeLeft = time - 1000
+      timeLeft = time - 1000
       return timeLeft
     })
+    if (timeLeft > 0) {
+      onProgress(timeLeft / minutesToMillis(minutes))
+    } else {
+      onProgress(0)
+    }
   }
 
   React.useEffect(() => {

@@ -1,23 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import CountDown from '../../components/CountDown'
 import RoundedButton from '../../components/RoundedButton'
+import * as Progress from 'react-native-progress'
 
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
 
 const Timer = ({ focusSubject }) => {
   const [isStarted, setIsStarted] = React.useState(false)
+  const [progress, setProgress] = React.useState(1)
+
+  const onProgress = (value) => {
+    setProgress(value)
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.countDown}>
-        <CountDown isPaused={!isStarted} />
+        <CountDown isPaused={!isStarted} onProgress={onProgress} />
+        <Progress.Bar
+          style={{ marginTop: spacing.lg }}
+          color='red'
+          progress={progress}
+          width={250}
+        />
       </View>
-      <View>
+      <View style={styles.taskWraper}>
         <Text style={styles.title}>Focusing on:</Text>
-        <Text style={styles.task}>{focusSubject}</Text>
+        <Text style={styles.task}>"{focusSubject}"</Text>
       </View>
       <View style={styles.btnWrapper}>
         <RoundedButton
@@ -38,19 +50,28 @@ const styles = StyleSheet.create({
   countDown: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.xxl,
+    paddingTop: spacing.xxl,
+  },
+  taskWraper: {
+    flex: 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.xxxl,
   },
   title: {
     color: colors.white,
     textAlign: 'center',
     fontSize: fontSize.xxl,
     fontWeight: 'bold',
+    marginBottom: spacing.md,
   },
-  task: {},
+  task: {
+    color: colors.white,
+    fontSize: fontSize.xl,
+  },
   btnWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: spacing.xxl,
   },
 })
 
