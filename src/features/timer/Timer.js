@@ -92,7 +92,7 @@ const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
         <RoundedButton
           style={{ borderColor: 'red' }}
           textStyle={{ color: 'red' }}
-          title='☓'
+          title='❌'
           size={60}
           onPress={clearSubject}
         />

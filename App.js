@@ -19,7 +19,8 @@ const App = () => {
   }
 
   const onClear = () => {
-    console.log('Clear')
+    setFocusSubject(null)
+    setFocusHistory([])
   }
 
   return (

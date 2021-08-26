@@ -1,32 +1,42 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
 import NotFound from '../../components/NotFound'
 import ListItem from '../../components/ListItem'
+import RoundedButton from '../../components/RoundedButton'
 
 const FocusHistory = ({ focuses, onClear }) => {
-  console.log(focuses)
-
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Things we've focused on:</Text>
       {focuses.length > 0 && (
-        <FlatList
-          contentContainerStyle={styles.list}
-          data={focuses}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <ListItem item={item} />}
-        />
+        <>
+          <FlatList
+            contentContainerStyle={styles.list}
+            data={focuses}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => <ListItem item={item} />}
+          />
+          <View style={styles.clearContainer}>
+            <RoundedButton
+              title='Clear'
+              size={80}
+              textStyle={{ fontSize: fontSize.xl }}
+              onPress={() => onClear()}
+            />
+          </View>
+        </>
       )}
       {focuses.length === 0 && <NotFound />}
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: spacing.lg,
     paddingTop: 0,
   },
@@ -39,7 +49,12 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   list: {
+    flex: 1,
     height: '100%',
+  },
+  clearContainer: {
+    alignItems: 'center',
+    padding: spacing.md,
   },
 })
 
