@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
+import NotFound from '../../components/NotFound'
 
 const FocusHistory = ({ focuses, onClear }) => {
   console.log(focuses)
@@ -24,6 +25,7 @@ const FocusHistory = ({ focuses, onClear }) => {
           )}
         />
       )}
+      {focuses.length === 0 && <NotFound />}
     </View>
   )
 }
