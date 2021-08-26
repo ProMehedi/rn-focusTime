@@ -8,12 +8,6 @@ export const fontSize = {
   xxxxl: 40,
 }
 
-export const fontWeight = {
-  light: 300,
-  normal: 400,
-  bold: 700,
-}
-
 export const spacing = {
   sm: 4,
   md: 8,
