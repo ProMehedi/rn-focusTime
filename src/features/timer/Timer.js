@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import * as Progress from 'react-native-progress'
+import { useKeepAwake } from 'expo-keep-awake'
 
 import CountDown from '../../components/CountDown'
 import RoundedButton from '../../components/RoundedButton'
-import * as Progress from 'react-native-progress'
-
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
 import Timing from './Timing'
@@ -13,6 +13,8 @@ const Timer = ({ focusSubject }) => {
   const [minutes, setMinutes] = React.useState(5)
   const [isStarted, setIsStarted] = React.useState(false)
   const [progress, setProgress] = React.useState(1)
+
+  useKeepAwake()
 
   const onProgress = (value) => {
     setProgress(value)
@@ -49,7 +51,7 @@ const Timer = ({ focusSubject }) => {
       <View style={styles.btnWrapper}>
         <RoundedButton
           title={isStarted ? '⏸' : '⏩'}
-          size={150}
+          size={130}
           onPress={() => setIsStarted(!isStarted)}
         />
       </View>
