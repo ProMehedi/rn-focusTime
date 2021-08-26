@@ -4,21 +4,17 @@ import Focus from './src/features/focus/Focus'
 import Timer from './src/features/timer/Timer'
 import { colors } from './src/utils/Colors'
 
+const STATUS = {
+  COMPLETE: 1,
+  INCOMPLETE: 0,
+}
+
 const App = () => {
   const [focusSubject, setFocusSubject] = React.useState(null)
   const [focusHistory, setFocusHistory] = React.useState([])
 
-  useEffect(() => {
-    if (focusSubject) {
-      setFocusHistory([...focusHistory, focusSubject])
-    }
-  }, [focusSubject])
-
-  console.log('focusHistory', focusHistory)
-
-  // Clear Subject & Back to Main Screen
-  const clearSubject = () => {
-    setFocusSubject(null)
+  const addFocusHistoryWithState = (subject, status) => {
+    setFocusHistory([...focusHistory, { subject, status }])
   }
 
   return (
@@ -27,9 +23,13 @@ const App = () => {
         <Timer
           focusSubject={focusSubject}
           onTimerEnd={() => {
+            addFocusHistoryWithState(focusSubject, STATUS.COMPLETE)
             setFocusSubject(null)
           }}
-          clearSubject={clearSubject}
+          clearSubject={() => {
+            addFocusHistoryWithState(focusSubject, STATUS.INCOMPLETE)
+            setFocusSubject(null)
+          }}
         />
       ) : (
         <Focus addSubject={setFocusSubject} />
