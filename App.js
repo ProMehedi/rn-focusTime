@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import Focus from './src/features/focus/Focus'
+import FocusHistory from './src/features/focus/FocusHistory'
 import Timer from './src/features/timer/Timer'
 import { colors } from './src/utils/Colors'
 
@@ -15,6 +16,10 @@ const App = () => {
 
   const addFocusHistoryWithState = (subject, status) => {
     setFocusHistory([...focusHistory, { subject, status }])
+  }
+
+  const onClear = () => {
+    console.log('Clear')
   }
 
   return (
@@ -32,7 +37,10 @@ const App = () => {
           }}
         />
       ) : (
-        <Focus addSubject={setFocusSubject} />
+        <>
+          <Focus addSubject={setFocusSubject} />
+          <FocusHistory focuses={focusHistory} onClear={onClear} />
+        </>
       )}
     </View>
   )

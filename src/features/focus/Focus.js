@@ -9,22 +9,20 @@ const Focus = ({ addSubject }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.title}>What would you like to focus on?</Text>
-        <View style={styles.inputGroup}>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setSubject(text)}
-            onSubmitEditing={() => addSubject(subject)}
-            placeholder='Type here to focus'
-            placeholderTextColor='#ccc'
-          />
-          <RoundedButton
-            title='+'
-            size={48}
-            onPress={() => addSubject(subject)}
-          />
-        </View>
+      <Text style={styles.title}>What would you like to focus on?</Text>
+      <View style={styles.inputGroup}>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setSubject(text)}
+          onSubmitEditing={() => addSubject(subject)}
+          placeholder='Type here to focus'
+          placeholderTextColor='#ccc'
+        />
+        <RoundedButton
+          title='+'
+          size={48}
+          onPress={() => addSubject(subject)}
+        />
       </View>
     </View>
   )
@@ -32,13 +30,9 @@ const Focus = ({ addSubject }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flex: 1,
-  },
-  inputContainer: {
-    flex: 0.5,
     padding: spacing.lg,
     justifyContent: 'center',
+    marginVertical: spacing.xxl,
   },
   title: {
     color: colors.white,
