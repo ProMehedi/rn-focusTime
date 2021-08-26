@@ -14,6 +14,7 @@ const FocusHistory = ({ focuses, onClear }) => {
       {focuses.length > 0 && (
         <>
           <FlatList
+            style={{ flex: 1 }}
             contentContainerStyle={styles.list}
             data={focuses}
             keyExtractor={(item, index) => index.toString()}
@@ -49,8 +50,9 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   list: {
-    flex: 1,
-    height: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    padding: spacing.md,
+    paddingTop: 0,
   },
   clearContainer: {
     alignItems: 'center',
