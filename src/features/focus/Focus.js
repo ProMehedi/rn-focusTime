@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native'
+import RoundedButton from '../../components/RoundedButton'
 
 const Focus = () => {
   return (
@@ -21,9 +22,7 @@ const Focus = () => {
             placeholder='Type here to focus'
             placeholderTextColor='#ccc'
           />
-          <View style={styles.button}>
-            <Button color='#252250' title='+' />
-          </View>
+          <RoundedButton title='+' size={Platform.OS === 'ios' ? 45 : 50} />
         </View>
       </View>
     </View>
@@ -49,26 +48,17 @@ const styles = StyleSheet.create({
   inputGroup: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   input: {
     flex: 1,
     borderWidth: 1,
     borderColor: '#f9f9f9',
     padding: 12,
-    marginBottom: 10,
+    marginRight: 10,
     color: '#fff',
     borderRadius: 4,
     fontSize: 16,
-  },
-  button: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#fff',
-    padding: 12,
-    marginLeft: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 
