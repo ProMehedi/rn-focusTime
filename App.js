@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import Focus from './src/features/focus/Focus'
 import Timer from './src/features/timer/Timer'
 import { colors } from './src/utils/Colors'
 
 const App = () => {
-  const [focusSubject, setFocusSubject] = useState('Something')
+  const [focusSubject, setFocusSubject] = React.useState(null)
+  const [focusHistory, setFocusHistory] = React.useState([])
+
+  useEffect(() => {
+    if (focusSubject) {
+      setFocusHistory([...focusHistory, focusSubject])
+    }
+  }, [focusSubject])
+
+  console.log('focusHistory', focusHistory)
+
+  // Clear Subject & Back to Main Screen
+  const clearSubject = () => {
+    setFocusSubject(null)
+  }
 
   return (
     <View style={styles.container}>
@@ -15,6 +29,7 @@ const App = () => {
           onTimerEnd={() => {
             setFocusSubject(null)
           }}
+          clearSubject={clearSubject}
         />
       ) : (
         <Focus addSubject={setFocusSubject} />

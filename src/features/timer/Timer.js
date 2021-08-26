@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Platform, StyleSheet, Text, Vibration, View } from 'react-native'
 import * as Progress from 'react-native-progress'
 import { useKeepAwake } from 'expo-keep-awake'
@@ -11,12 +11,13 @@ import Timing from './Timing'
 
 const DEFAULT_TIME = 0.1
 
-const Timer = ({ focusSubject, onTimerEnd }) => {
+const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   const [minutes, setMinutes] = React.useState(DEFAULT_TIME)
   const [isStarted, setIsStarted] = React.useState(false)
   const [progress, setProgress] = React.useState(1)
 
-  useKeepAwake()
+  // Keeping App Awake
+  // useKeepAwake()
 
   const onProgress = (value) => {
     setProgress(value)
@@ -44,7 +45,7 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
   }
 
   // Back to main screen
-  useEffect(() => {
+  React.useEffect(() => {
     if (progress === 0) {
       onTimerEnd()
     }
@@ -83,8 +84,17 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
       <View style={styles.btnWrapper}>
         <RoundedButton
           title={isStarted ? '⏸' : '⏩'}
-          size={130}
+          size={120}
           onPress={() => setIsStarted(!isStarted)}
+        />
+      </View>
+      <View style={styles.clearSubject}>
+        <RoundedButton
+          style={{ borderColor: 'red' }}
+          textStyle={{ color: 'red' }}
+          title='☓'
+          size={60}
+          onPress={clearSubject}
         />
       </View>
     </View>
@@ -102,7 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: spacing.xxl,
   },
   taskWraper: {
-    flex: 0.3,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: spacing.xxxl,
@@ -121,6 +131,10 @@ const styles = StyleSheet.create({
   btnWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  clearSubject: {
+    marginLeft: spacing.lg,
+    marginBottom: spacing.lg,
   },
 })
 
