@@ -7,7 +7,12 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      {focusSubject ? <Text>Hello!</Text> : <Focus />}
+      {focusSubject ? (
+        <Text>Hello!</Text>
+      ) : (
+        <Focus addSubject={setFocusSubject} />
+      )}
+      <Text>{focusSubject}</Text>
     </View>
   )
 }

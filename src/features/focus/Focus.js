@@ -9,7 +9,9 @@ import {
 } from 'react-native'
 import RoundedButton from '../../components/RoundedButton'
 
-const Focus = () => {
+const Focus = ({ addSubject }) => {
+  const [subject, setSubject] = React.useState('')
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -17,12 +19,15 @@ const Focus = () => {
         <View style={styles.inputGroup}>
           <TextInput
             style={styles.input}
-            onFocus={() => console.log('onFocus')}
-            onBlur={() => console.log('onBlur')}
+            onChangeText={(text) => setSubject(text)}
             placeholder='Type here to focus'
             placeholderTextColor='#ccc'
           />
-          <RoundedButton title='+' size={Platform.OS === 'ios' ? 45 : 50} />
+          <RoundedButton
+            title='+'
+            size={Platform.OS === 'ios' ? 45 : 50}
+            onPress={() => addSubject(subject)}
+          />
         </View>
       </View>
     </View>
