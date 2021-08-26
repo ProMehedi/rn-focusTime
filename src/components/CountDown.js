@@ -16,7 +16,7 @@ const formateTime = (milis) => {
   }${seconds}`
 }
 
-const CountDown = ({ minutes = 5, isPaused = false, onProgress }) => {
+const CountDown = ({ minutes, isPaused, onProgress, onEnd }) => {
   const [milis, setMilis] = React.useState(minutesToMillis(minutes))
 
   const interval = React.useRef(null)
@@ -25,11 +25,16 @@ const CountDown = ({ minutes = 5, isPaused = false, onProgress }) => {
     let timeLeft
     setMilis((time) => {
       if (time === 0) {
+        clearInterval(interval.current)
         return time
       }
       timeLeft = time - 1000
       return timeLeft
     })
+    if (timeLeft === 0) {
+      clearInterval(interval.current)
+      onEnd()
+    }
     if (timeLeft > 0) {
       onProgress(timeLeft / minutesToMillis(minutes))
     } else {
