@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { colors } from '../../utils/Colors'
 import { fontSize, spacing } from '../../utils/Sizes'
 import NotFound from '../../components/NotFound'
+import ListItem from '../../components/ListItem'
 
 const FocusHistory = ({ focuses, onClear }) => {
   console.log(focuses)
@@ -16,13 +17,7 @@ const FocusHistory = ({ focuses, onClear }) => {
           contentContainerStyle={styles.list}
           data={focuses}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <Text
-              style={[styles.item, { color: item.status ? 'green' : 'red' }]}
-            >
-              ▶ {item.subject}
-            </Text>
-          )}
+          renderItem={({ item }) => <ListItem item={item} />}
         />
       )}
       {focuses.length === 0 && <NotFound />}
@@ -45,13 +40,6 @@ const styles = StyleSheet.create({
   },
   list: {
     height: '100%',
-  },
-  item: {
-    color: colors.white,
-    fontSize: fontSize.md,
-    paddingVertical: spacing.lg,
-    borderTopWidth: 0.5,
-    borderColor: colors.white,
   },
 })
 
