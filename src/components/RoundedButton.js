@@ -29,7 +29,7 @@ const styles = (size) =>
     },
     text: {
       color: colors.white,
-      fontSize: size / 2,
+      fontSize: size / 2.5,
     },
   })
 

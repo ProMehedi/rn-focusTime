@@ -16,7 +16,7 @@ const formateTime = (milis) => {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 }
 
-const CountDown = ({ time = 30, isPaused }) => {
+const CountDown = ({ time = 30, isPaused = false }) => {
   const [milis, setMilis] = React.useState(minutesToMillis(time))
 
   const interval = React.useRef(null)
@@ -32,9 +32,11 @@ const CountDown = ({ time = 30, isPaused }) => {
   }
 
   React.useEffect(() => {
-    interval.current = setInterval(countDown, 1000)
-    return () => clearInterval(interval.current)
-  }, [])
+    if (!isPaused) {
+      interval.current = setInterval(countDown, 1000)
+      return () => clearInterval(interval.current)
+    }
+  }, [isPaused])
 
   return (
     <View style={styles.container}>
