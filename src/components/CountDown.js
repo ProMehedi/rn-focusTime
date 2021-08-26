@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { colors } from '../utils/Colors'
-import { fontSize } from '../utils/Sizes'
+import { fontSize, spacing } from '../utils/Sizes'
 
 // Minutes to millis
 const minutesToMillis = (minutes) => {
@@ -16,8 +16,25 @@ const formateTime = (milis) => {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 }
 
-const CountDown = ({ time = 5, isPaused }) => {
+const CountDown = ({ time = 30, isPaused }) => {
   const [milis, setMilis] = React.useState(minutesToMillis(time))
+
+  const interval = React.useRef(null)
+
+  const countDown = () => {
+    setMilis((time) => {
+      if (time === 0) {
+        return time
+      }
+      const timeLeft = time - 1000
+      return timeLeft
+    })
+  }
+
+  React.useEffect(() => {
+    interval.current = setInterval(countDown, 1000)
+    return () => clearInterval(interval.current)
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -29,10 +46,13 @@ const CountDown = ({ time = 5, isPaused }) => {
 const styles = StyleSheet.create({
   container: {},
   text: {
-    fontSize: fontSize.xxxxl,
+    fontSize: fontSize.xxxxxl,
     fontWeight: 'bold',
     color: colors.white,
-    backgroundColor: 'rgba(94,132,226,0.3)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    borderRadius: 6,
   },
 })
 

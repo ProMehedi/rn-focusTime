@@ -6,6 +6,7 @@ export const fontSize = {
   xxl: 24,
   xxxl: 32,
   xxxxl: 40,
+  xxxxxl: 60,
 }
 
 export const spacing = {
